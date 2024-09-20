@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_f478c309b4125debf6064e8303b3ddb9 {
+                #map_669a7500bb8ec86df5dc7a7a489ec9a5 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,24 +35,21 @@
                 .leaflet-container { font-size: 1rem; }
             </style>
         
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
 </head>
 <body>
     
     
-            <div class="folium-map" id="map_f478c309b4125debf6064e8303b3ddb9" ></div>
+            <div class="folium-map" id="map_669a7500bb8ec86df5dc7a7a489ec9a5" ></div>
         
 </body>
 <script>
     
     
-            var map_f478c309b4125debf6064e8303b3ddb9 = L.map(
-                "map_f478c309b4125debf6064e8303b3ddb9",
+            var map_669a7500bb8ec86df5dc7a7a489ec9a5 = L.map(
+                "map_669a7500bb8ec86df5dc7a7a489ec9a5",
                 {
-                    center: [32.99355444047984, 120.10399755932774],
-                    crs: L.CRS.EPSG3857,
+                    center: [24.51247022000607, 114.65670740984382],
+                    crs: L.CRS.EPSG4326,
                     zoom: 13,
                     zoomControl: true,
                     preferCanvas: false,
@@ -63,34 +60,28 @@
 
         
     
-            var tile_layer_253f2016de8791b3f7e6c8781c74c3e8 = L.tileLayer(
-                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
-                {"attribution": "\u0026copy; \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca target=\"_blank\" href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca target=\"_blank\" href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_f478c309b4125debf6064e8303b3ddb9);
+            var tile_layer_0477c6875e746212b385c88d5d6ac2a6 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_669a7500bb8ec86df5dc7a7a489ec9a5);
         
     
-            var marker_cluster_21b2a26b840e22f45272e4b03062d2d1 = L.markerClusterGroup(
+            var marker_ba11d6a272a1b6e06a3a88f34bf3388f = L.marker(
+                [24.51247022000607, 114.65670740984382],
                 {}
-            );
-            map_f478c309b4125debf6064e8303b3ddb9.addLayer(marker_cluster_21b2a26b840e22f45272e4b03062d2d1);
+            ).addTo(map_669a7500bb8ec86df5dc7a7a489ec9a5);
         
     
-            var marker_f72ea38b14c4853bc1a37da42b4b0f16 = L.marker(
-                [32.99355444047984, 120.10399755932774],
-                {}
-            ).addTo(marker_cluster_21b2a26b840e22f45272e4b03062d2d1);
-        
-    
-        var popup_b51e3856b760744252044f0dcfba36d1 = L.popup({"maxWidth": 300});
+        var popup_b8f8b2a3f4c0ee92171454ccaed1b98f = L.popup({"maxWidth": "100%"});
 
         
             
-                var html_ee7db3c84f7bc03df893f775bd951659 = $(`<div id="html_ee7db3c84f7bc03df893f775bd951659" style="width: 100.0%; height: 100.0%;">纬度: 32.99355444047984<br>经度: 120.10399755932774</div>`)[0];
-                popup_b51e3856b760744252044f0dcfba36d1.setContent(html_ee7db3c84f7bc03df893f775bd951659);
+                var html_f7316c3bc5aa007704006a7e9f1e06dc = $(`<div id="html_f7316c3bc5aa007704006a7e9f1e06dc" style="width: 100.0%; height: 100.0%;">test</div>`)[0];
+                popup_b8f8b2a3f4c0ee92171454ccaed1b98f.setContent(html_f7316c3bc5aa007704006a7e9f1e06dc);
             
         
 
-        marker_f72ea38b14c4853bc1a37da42b4b0f16.bindPopup(popup_b51e3856b760744252044f0dcfba36d1)
+        marker_ba11d6a272a1b6e06a3a88f34bf3388f.bindPopup(popup_b8f8b2a3f4c0ee92171454ccaed1b98f)
         ;
 
         

@@ -22,15 +22,15 @@ def isin_area(_gdf, x, y):
         return True
     return False
 def write_history(point,address):
-    if not os.path.exists("./history.txt"):
-        f=open("history.txt",mode='w',encoding="utf-8")
-        f.write("datetime;address;x;y\n")
+    if not os.path.exists("./history.csv"):
+        f=open("history.csv",mode='w',encoding="utf-8")
+        f.write("生成时间;address;去过了吗;x;y\n")
         f.close()
-    f=open("history.txt",mode='a',encoding='utf-8')
-    t=datetime.datetime.now().strftime("%Y-%m-%d")
+    f=open("history.csv",mode='a',encoding='utf-8')
+    t=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     x=round(point[0],4)
     y=round(point[1],4)
-    f.write(f"{t};{address};{x};{y}\n")
+    f.write(f"{t};{address};no;{x};{y}\n")
     f.close()
 
 def create_map(point_list):
@@ -40,18 +40,21 @@ def create_map(point_list):
         y=item[1]
     coordinates=point_list
     # 创建地图，设置初始位置和缩放级别
-    m = folium.Map(location=[x,y], zoom_start=13,tiles="CartoDB Positron") # CartoDB Positron, OpenStreetMap
-
-    # 创建一个MarkerCluster来管理标记
-    marker_cluster = MarkerCluster().add_to(m)
+    m = folium.Map(location=[x,y], zoom_start=13,tiles="OpenStreetMap",crs="EPSG4326") # CartoDB Positron, OpenStreetMap
+    """    - "OpenStreetMap"
+    - "Mapbox Bright" (Limited levels of zoom for free tiles)
+    - "Mapbox Control Room" (Limited levels of zoom for free tiles)
+    - "Stamen" (Terrain, Toner, and Watercolor)
+    - "Cloudmade" (Must pass API key)
+    - "Mapbox" (Must pass API key)
+    - "CartoDB" (positron and dark_matter)"""
     # 添加标记到地图
     for coord in coordinates:
         lat, lon = coord
-        popup_content = f"纬度: {lat}<br>经度: {lon}"
-        popup = folium.Popup(popup_content, max_width=300)
-        # 创建标记并添加到MarkerCluster
-        marker = folium.Marker(location=[lat, lon], popup=popup)
-        marker.add_to(marker_cluster)
+        folium.Marker(
+            location=[x,y],
+            popup="test"
+        ).add_to(m)
     # 保存地图为HTML文件
     m.save('map.html')
 
@@ -68,7 +71,7 @@ if __name__ == '__main__':
         x, y = random_point(minx, miny, maxx, maxy)
         isin_flag = isin_area(gdf, x, y)
     # x, y = random_point(minx, miny, maxx, maxy)
-    temp = gpd.tools.reverse_geocode([Point(x,y)],provider="arcgis")
+    temp = gpd.tools.reverse_geocode([Point(x,y)]) # arcgis
     print(f"location,x: {x}, y: {y}")
     print(f"address: {temp.loc[0, 'address']}")
     write_history([x,y],temp.loc[0, 'address'])
