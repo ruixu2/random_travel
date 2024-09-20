@@ -4,6 +4,10 @@ import config
 from shapely.geometry import Point
 import os
 import datetime
+import folium
+from folium.plugins import MarkerCluster
+from folium import FeatureGroup, Marker
+from folium.map import Popup
 
 def random_point(minx, miny, maxx, maxy):
     x = random.uniform(minx, maxx)
@@ -29,6 +33,29 @@ def write_history(point,address):
     f.write(f"{t};{address};{x};{y}\n")
     f.close()
 
+def create_map(point_list):
+    # 纬度、经度
+    for item in point_list:
+        x=item[0]
+        y=item[1]
+    coordinates=point_list
+    # 创建地图，设置初始位置和缩放级别
+    m = folium.Map(location=[x,y], zoom_start=13,tiles="CartoDB Positron") # CartoDB Positron, OpenStreetMap
+
+    # 创建一个MarkerCluster来管理标记
+    marker_cluster = MarkerCluster().add_to(m)
+    # 添加标记到地图
+    for coord in coordinates:
+        lat, lon = coord
+        popup_content = f"纬度: {lat}<br>经度: {lon}"
+        popup = folium.Popup(popup_content, max_width=300)
+        # 创建标记并添加到MarkerCluster
+        marker = folium.Marker(location=[lat, lon], popup=popup)
+        marker.add_to(marker_cluster)
+    # 保存地图为HTML文件
+    m.save('map.html')
+
+
 if __name__ == '__main__':
     gdf = gpd.read_file(config.area_file)
     gdf.to_crs(crs='EPSG:4326', inplace=True)
@@ -45,3 +72,4 @@ if __name__ == '__main__':
     print(f"location,x: {x}, y: {y}")
     print(f"address: {temp.loc[0, 'address']}")
     write_history([x,y],temp.loc[0, 'address'])
+    create_map([[y,x]])
